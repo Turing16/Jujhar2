@@ -1,6 +1,8 @@
+
 import 'package:demo_flutter_application/dish-details.dart';
 import 'package:demo_flutter_application/login-page-form.dart';
 import 'package:demo_flutter_application/login-page.dart';
+import 'package:demo_flutter_application/pages/appui2.dart';
 import 'package:demo_flutter_application/pages/first-screen.dart';
 import 'package:demo_flutter_application/pages/fourth-screen.dart';
 import 'package:demo_flutter_application/pages/list-beverages.dart';
@@ -37,7 +39,9 @@ class MainApp extends StatelessWidget {
         "/details":(context) => const DishDetails(),
         "/login":(context) => const LoginPage(),
         "/register":(context) => const RegisterPage(),
-        "/loginForm":(context) => const LoginPageForm()
+        "/loginForm":(context) => const LoginPageForm(),
+        "/appui2":(context) => const Appui2()
+        
       },
     );
  

@@ -20,7 +20,7 @@ class _SplashState extends State<Splash> {
         builder: (context) => const ListDishes(),
       ));*/
 
-      Navigator.of(context).pushReplacementNamed("/loginForm");
+      Navigator.of(context).pushReplacementNamed("/appui2");
     });
   }
   

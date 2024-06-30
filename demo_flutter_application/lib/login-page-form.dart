@@ -74,12 +74,12 @@ styleTextField(String hintText){
             //decoration: InputDecoration(labelText: "Password"),
             decoration: styleTextField("Password"),
             obscureText: true,
-            validator: (value){
-              if(value ==null ||value.isEmpty){
-                return "Password Cannot be Empty";
-              }
-              if(!value.toString())
-            },
+            // validator: (value){
+            //   if(value ==null ||value.isEmpty){
+            //     return "Password Cannot be Empty";
+            //   }
+            //   if(!value.toString())
+            // },
           ),
           const SizedBox(height:12),
 
