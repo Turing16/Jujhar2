@@ -1,5 +1,7 @@
 import "dart:async";
 
+import "package:demo_flutter_application/utils/util.dart";
+import "package:firebase_auth/firebase_auth.dart";
 import "package:flutter/material.dart";
 
 class Splash extends StatefulWidget {
@@ -14,13 +16,29 @@ class _SplashState extends State<Splash> {
   @override
   void initState() {
     super.initState();
+
+    FirebaseAuth.instance.authStateChanges().listen((User? user) {
+      print("User Details: $user");
+      if (user == null) {
+        print('User is currently signed out!');
+        Timer(const Duration(seconds: 3), () {
+          Navigator.of(context).pushReplacementNamed("/homepage");
+        });
+      } else {
+        print('User is signed in!');
+        Util.UID = user.uid;
+        Timer(const Duration(seconds: 3), () {
+          Navigator.of(context).pushReplacementNamed("/dishes");
+        });
+      }
+    });
     Timer(const Duration(seconds: 2), () {
       //Navigator.of(context).push(MaterialPageRoute(
       /*Navigator.of(context).pushReplacement(MaterialPageRoute(
         builder: (context) => const ListDishes(),
       ));*/
 
-      Navigator.of(context).pushReplacementNamed("/appui2");
+      Navigator.of(context).pushReplacementNamed("/homepage");
     });
   }
   

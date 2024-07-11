@@ -1,4 +1,8 @@
+import "package:demo_flutter_application/model/task.dart";
 import "package:demo_flutter_application/pages/model/dish.dart";
+import "package:demo_flutter_application/services/task-services.dart";
+import "package:demo_flutter_application/utils/util.dart";
+import "package:firebase_auth/firebase_auth.dart";
 import "package:flutter/material.dart";
 
 class ListDishes extends StatefulWidget {
@@ -9,6 +13,26 @@ class ListDishes extends StatefulWidget {
 }
 
 class _ListDishesState extends State<ListDishes> {
+
+  addTask() async {
+    TaskService service = TaskService(userId: Util.UID);
+
+    Task task = Task(
+        title: "Fetch Data in Flutter Firebase",
+        description: "Create a New UI to fetch and display data",
+        startDate: DateTime.now(),
+        endDate: DateTime.now(),
+        isCompleted: false,
+        createdOn: DateTime.now());
+
+    service.addTask(task);
+  }
+
+  fetchTasks() async {
+    print("fetchTasks executed... UID is: ${Util.UID}");
+    TaskService service = TaskService(userId: Util.UID);
+    service.getTasks();
+  }
 
   final List<Dish> dishes = [
     Dish(
@@ -44,6 +68,10 @@ class _ListDishesState extends State<ListDishes> {
   bool isAscending = true;
 
   
+  logout(BuildContext context) async {
+    await FirebaseAuth.instance.signOut();
+    Navigator.of(context).pushReplacementNamed("/");
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,9 +81,9 @@ class _ListDishesState extends State<ListDishes> {
         title: const Text("List of Dishes"),
         actions: <Widget>[
           IconButton(
-            icon: const Icon(Icons.arrow_circle_right),
+            icon: const Icon(Icons.logout),
             onPressed:(){
-              Navigator.of(context).pushReplacementNamed("/beverages");
+            logout(context);
             }
           )
         ]
@@ -96,13 +124,8 @@ class _ListDishesState extends State<ListDishes> {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed:() {
-    setState(() {
-      isAscending = !isAscending;
-            dishes.sort((a, b) => isAscending ? a.price.compareTo(b.price) : b.price.compareTo(a.price));
-          });
-  },
-        child: const Icon(Icons.sort),
+        onPressed: addTask(),
+        child: const Icon(Icons.add),
       ),
     );
   }

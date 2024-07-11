@@ -1,5 +1,6 @@
 
 import 'package:demo_flutter_application/dish-details.dart';
+import 'package:demo_flutter_application/homepage.dart';
 import 'package:demo_flutter_application/login-page-form.dart';
 import 'package:demo_flutter_application/login-page.dart';
 import 'package:demo_flutter_application/pages/appui2.dart';
@@ -12,8 +13,15 @@ import 'package:demo_flutter_application/pages/splash.dart';
 import 'package:demo_flutter_application/pages/third-screen.dart';
 import 'package:demo_flutter_application/register-page.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+main() async{
+  WidgetsFlutterBinding.ensureInitialized();
 
-void main() {
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   runApp(const MainApp());
 }
 
@@ -40,7 +48,8 @@ class MainApp extends StatelessWidget {
         "/login":(context) => const LoginPage(),
         "/register":(context) => const RegisterPage(),
         "/loginForm":(context) => const LoginPageForm(),
-        "/appui2":(context) => const Appui2()
+        "/appui2":(context) => const Appui2(),
+        "/homepage":(context) => const Homepage()
         
       },
     );
